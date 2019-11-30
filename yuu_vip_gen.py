@@ -33,8 +33,8 @@ if __name__  == '__main__':
         os.system("sed -i '/env/'d %s/include/default_pkg.sv" %(args.output_dir))
         os.system("rm %s/src/sv/default_env -rf" %(args.output_dir))
         os.system("rm %s/src/sv/default_slave -rf" %(args.output_dir))
-        os.system("rename default_master %s %s/src/sv/default_master" %(args.uvc_name, args.output_dir))
-        os.system("rename default_master %s %s/src/sv/%s/*" %(args.uvc_name, args.output_dir, args.uvc_name))
+        os.system("rename default_master %s_agent %s/src/sv/default_master" %(args.uvc_name, args.output_dir))
+        os.system("rename default_master %s %s/src/sv/%s_agent/*" %(args.uvc_name, args.output_dir, args.uvc_name))
     else:
         os.system("sed -i 's/default/%s/g' %s/include/*" %(args.uvc_name, args.output_dir))
         os.system("sed -i 's/DEFAULT/%s/g' %s/include/*" %(args.uvc_name.upper(), args.output_dir))
@@ -55,3 +55,5 @@ if __name__  == '__main__':
     os.system("rename default %s %s/include/*" %(args.uvc_name, args.output_dir))
     os.system("rename default %s %s/src/sv/default_common" %(args.uvc_name, args.output_dir))
     os.system("rename default %s %s/src/sv/%s_common/*" %(args.uvc_name, args.output_dir, args.uvc_name))
+
+    print("Agent %s generate done" %(args.uvc_name))

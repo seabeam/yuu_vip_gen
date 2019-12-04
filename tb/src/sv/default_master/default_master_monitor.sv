@@ -3,7 +3,7 @@
 
 class default_master_monitor extends uvm_monitor;
   virtual default_master_interface  vif;
-  uvm_analysis_port #(default_item) out_monitor_ap;
+  uvm_analysis_port #(default_master_item) out_monitor_ap;
 
   default_master_config cfg;
   uvm_event_pool events;

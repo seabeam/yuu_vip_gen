@@ -1,7 +1,7 @@
 `ifndef DEFAULT_MASTER_ANALYZER_SV
 `define DEFAULT_MASTER_ANALYZER_SV
 
-class default_master_analyzer extends uvm_subscriber #(default_item);
+class default_master_analyzer extends uvm_subscriber #(default_master_item);
   virtual default_master_interface vif;
 
   default_master_config cfg;
@@ -20,7 +20,7 @@ class default_master_analyzer extends uvm_subscriber #(default_item);
   extern           virtual task          run_phase(uvm_phase phase);
   extern           virtual function void report_phase(uvm_phase phase);
 
-  extern           virtual function void write(default_item t);
+  extern           virtual function void write(default_master_item t);
   extern protected virtual task          measure_start();
   extern protected virtual task          measure_end();
 endclass
@@ -52,7 +52,7 @@ function void default_master_analyzer::report_phase(uvm_phase phase);
   `uvm_info("report_phase", $sformatf("DEFAULT master speed is %f", tput_rate), UVM_LOW);
 endfunction
 
-function void default_master_analyzer::write(default_item t);
+function void default_master_analyzer::write(default_master_item t);
 endfunction
 
 task default_master_analyzer::measure_start();

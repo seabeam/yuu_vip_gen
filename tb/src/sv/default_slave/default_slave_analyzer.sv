@@ -1,7 +1,7 @@
 `ifndef DEFAULT_SLAVE_ANALYZER_SV
 `define DEFAULT_SLAVE_ANALYZER_SV
 
-class default_slave_analyzer extends uvm_subscriber #(default_item);
+class default_slave_analyzer extends uvm_subscriber #(default_slave_item);
   virtual default_slave_interface vif;
 
   default_slave_config cfg;
@@ -20,7 +20,7 @@ class default_slave_analyzer extends uvm_subscriber #(default_item);
   extern           virtual task          run_phase(uvm_phase phase);
   extern           virtual function void report_phase(uvm_phase phase);
 
-  extern           virtual function void write(default_item t);
+  extern           virtual function void write(default_slave_item t);
   extern protected virtual task          measure_start();
   extern protected virtual task          measure_end();
 endclass
@@ -52,7 +52,7 @@ function void default_slave_analyzer::report_phase(uvm_phase phase);
   `uvm_info("report_phase", $sformatf("DEFAULT slave speed is %f", tput_rate), UVM_LOW);
 endfunction
 
-function void default_slave_analyzer::write(default_item t);
+function void default_slave_analyzer::write(default_slave_item t);
 endfunction
 
 task default_slave_analyzer::measure_start();

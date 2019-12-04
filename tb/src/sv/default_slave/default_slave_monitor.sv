@@ -3,7 +3,7 @@
 
 class default_slave_monitor extends uvm_monitor;
   virtual default_slave_interface  vif;
-  uvm_analysis_port #(default_item) out_monitor_ap;
+  uvm_analysis_port #(default_common_item) out_monitor_ap;
 
   default_slave_config cfg;
   uvm_event_pool events;

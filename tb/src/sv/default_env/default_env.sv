@@ -1,5 +1,5 @@
-`ifndef DEFAULT_ENV_SVH
-`define DEFAULT_ENV_SVH
+`ifndef DEFAULT_ENV_SV
+`define DEFAULT_ENV_SV
 
 class default_env extends uvm_env;
   default_master_agent  master[];

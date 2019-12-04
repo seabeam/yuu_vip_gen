@@ -11,7 +11,7 @@ class default_master_agent extends uvm_agent;
   default_master_config  cfg;
 
   uvm_analysis_port #(default_master_item) out_driver_ap;
-  uvm_analysis_port #(default_item)        out_monitor_ap;
+  uvm_analysis_port #(default_master_item) out_monitor_ap;
 
   `uvm_component_utils_begin(default_master_agent)
   `uvm_component_utils_end

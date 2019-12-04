@@ -26,10 +26,10 @@ class default_slave_monitor_callback extends uvm_callback;
     super.new(name);
   endfunction
 
-  virtual task pre_collect(default_slave_monitor monitor, default_item item);
+  virtual task pre_collect(default_slave_monitor monitor, default_slave_item item);
   endtask
 
-  virtual task post_collect(default_slave_monitor monitor, default_item item);
+  virtual task post_collect(default_slave_monitor monitor, default_slave_item item);
   endtask
 endclass
 

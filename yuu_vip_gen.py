@@ -5,9 +5,9 @@ import argparse
 
 if __name__  == '__main__':
     arg_parser = argparse.ArgumentParser(description="TB generator argument process")
-    arg_parser.add_argument('-n', '--name', required=True, dest='uvc_name')
-    arg_parser.add_argument('-o', '--output', required=True, dest='output_dir')
-    arg_parser.add_argument('-s', '--slave', default=False, dest='has_slave', action="store_true")
+    arg_parser.add_argument('-n', '--name', required=True, dest='uvc_name', help='Module name user expected')
+    arg_parser.add_argument('-o', '--output', required=False, dest='output_dir', default='./', help='Output path, set to current folder by default')
+    arg_parser.add_argument('-s', '--slave', default=False, dest='has_slave', action="store_true", help='Include slave in output')
     args = arg_parser.parse_args()
 
     script_dir = os.path.dirname(os.path.abspath(__file__))

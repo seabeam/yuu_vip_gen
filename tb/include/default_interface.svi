@@ -1,7 +1,0 @@
-`ifndef DEFAULT_INTERFACE_SVI
-`define DEFAULT_INTERFACE_SVI
-
-interface default_interface();
-endinterface
-
-`endif

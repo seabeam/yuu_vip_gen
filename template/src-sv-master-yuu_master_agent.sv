@@ -32,10 +32,10 @@ endfunction
 
 function void {{ module }}_master_agent::build_phase(uvm_phase phase);
   if (!uvm_config_db #({{ module }}_master_config)::get(null, get_full_name(), "cfg", cfg)) begin
-    `uvm_fatal("build_phase", "Cannot get master configuration");
+    `uvm_fatal("build_phase", "Cannot get {{ module }} master configuration");
   end
   if (cfg == null)
-    `uvm_fatal("build_phase", "Get a null master configuration")
+    `uvm_fatal("build_phase", "Get a null {{ module }} master configuration")
 
   monitor = {{ module }}_master_monitor::type_id::create("monitor", this);
   monitor.cfg = cfg;

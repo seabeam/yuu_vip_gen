@@ -9,6 +9,25 @@ import argparse
 
 from jinja2 import Environment, FileSystemLoader
 
+agent_list = [
+    "include-yuu_defines.svh",
+    "src-sv-agent-yuu_adapter.sv",
+    "src-sv-agent-yuu_agent.sv",
+    "src-sv-agent-yuu_analyzer.sv",
+    "src-sv-agent-yuu_bus_checker.sv",
+    "src-sv-agent-yuu_callbacks.sv",
+    "src-sv-agent-yuu_collector.sv",
+    "src-sv-agent-yuu_config.sv",
+    "src-sv-agent-yuu_driver.sv",
+    "src-sv-agent-yuu_interface.svi",
+    "src-sv-agent-yuu_item.sv",
+    "src-sv-agent-yuu_monitor.sv",
+    "src-sv-agent-yuu_pkg.sv",
+    "src-sv-agent-yuu_sequence_lib.sv",
+    "src-sv-agent-yuu_sequencer.sv",
+    "src-sv-agent-yuu_type.sv",
+]
+
 env_list = [
     "include-yuu_defines.svh",
     "include-yuu_interface.svi",
@@ -90,15 +109,30 @@ if __name__  == '__main__':
     shutil.rmtree('%s/src' %(args.output), ignore_errors=True)
     shutil.rmtree('%s/test' %(args.output), ignore_errors=True)
     shutil.rmtree('%s/sim' %(args.output), ignore_errors=True)
-    for item in env_list:
-        (path, file) = parse_file(item, module_name)
-        try:
-            os.makedirs('%s/%s' %(args.output, path))
-        except FileExistsError:
-            pass
-        template = env.get_template(item)
-        with open('%s/%s/%s' %(args.output, path, file), 'w', encoding='UTF-8') as f:
-            f.write(template.render(module=module_name, use_env=args.env, addr_width=aw, data_width=dw))
+
+    if args.env:
+        for item in env_list:
+            (path, file) = parse_file(item, module_name)
+            try:
+                os.makedirs('%s/%s' %(args.output, path))
+            except FileExistsError:
+                pass
+            template = env.get_template(item)
+            with open('%s/%s/%s' %(args.output, path, file), 'w', encoding='UTF-8') as f:
+                f.write(template.render(module=module_name, use_env=args.env, addr_width=aw, data_width=dw))
+    else:
+        for item in agent_list:
+            (path, file) = parse_file(item, module_name)
+            try:
+                os.makedirs('%s/%s' %(args.output, path))
+            except FileExistsError:
+                pass
+            template = env.get_template(item)
+            with open('%s/%s/%s' %(args.output, path, file), 'w', encoding='UTF-8') as f:
+                f.write(template.render(module=module_name, use_env=args.env, addr_width=aw, data_width=dw))
+
+        shutil.move('%s/src/sv/%s_agent/%s_interface.svi' %(args.output, module_name, module_name), '%s/include' %(args.output))
+        shutil.move('%s/src/sv/%s_agent/%s_pkg.sv' %(args.output, module_name, module_name), '%s/include' %(args.output))
     
     os.mkdir('%s/test' %(args.output))
     os.mkdir('%s/sim' %(args.output))

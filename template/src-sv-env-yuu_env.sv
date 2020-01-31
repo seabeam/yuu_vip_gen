@@ -8,7 +8,7 @@ class {{ module }}_env extends uvm_env;
   {{ module }}_master_agent       master[];
   {{ module }}_slave_agent        slave[];
   {{ module }}_virtual_sequencer  vsequencer;
-  {{ module }}_env_checker        checker;
+  {{ module }}_env_checker        bus_checker;
 
   `uvm_component_utils({{ module }}_env)
 
@@ -33,7 +33,7 @@ function void {{ module }}_env::build_phase(uvm_phase phase);
 
   vsequencer = {{ module }}_virtual_sequencer::type_id::create("vsequencer", this);
   if (cfg.protocol_check_enable)
-    checker = {{ module }}_env_checker::type_id::create("checker", this);
+    bus_checker = {{ module }}_env_checker::type_id::create("bus_checker", this);
 
   master = new[cfg.mst_cfg.size()];
   vsequencer.master_sequencer = new[cfg.mst_cfg.size()];
@@ -55,7 +55,7 @@ function void {{ module }}_env::build_phase(uvm_phase phase);
 
   vsequencer.cfg = cfg;
   if (cfg.protocol_check_enable)
-    checker.cfg = cfg;
+    bus_checker.cfg = cfg;
 endfunction
 
 function void {{ module }}_env::connect_phase(uvm_phase phase);

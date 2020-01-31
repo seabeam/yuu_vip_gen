@@ -20,8 +20,6 @@ function {{ module }}_env_checker::new(string name, uvm_component parent);
 endfunction
 
 function void {{ module }}_env_checker::connect_phase(uvm_phase phase);
-  super.connect_phase(phase);
-
   if (cfg == null)
     `uvm_fatal("connect_phase", "Env checker cannot get env configuration object")
 

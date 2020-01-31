@@ -29,9 +29,9 @@ endfunction
 
 function void {{ module }}_slave_agent::build_phase(uvm_phase phase);
   if (!uvm_config_db #({{ module }}_slave_config)::get(null, get_full_name(), "cfg", cfg) && cfg == null)
-    `uvm_fatal("build_phase", "Cannot get slave configuration");
+    `uvm_fatal("build_phase", "Cannot get {{ module }} slave configuration");
   if (cfg == null)
-    `uvm_fatal("build_phase", "Get a null slave configuration")
+    `uvm_fatal("build_phase", "Get a null {{ module }} slave configuration")
 
   monitor = {{ module }}_slave_monitor::type_id::create("monitor", this);
   monitor.cfg = cfg;
